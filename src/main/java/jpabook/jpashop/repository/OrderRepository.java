@@ -1,7 +1,9 @@
 package jpabook.jpashop.repository;
 
+import jpabook.jpashop.api.OrderSimpleApiController;
 import jpabook.jpashop.domain.Order;
 
+import jpabook.jpashop.repository.order.simplequery.OrderSimpleQueryDto;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -105,8 +107,8 @@ public class OrderRepository {
         return em.createQuery(
                 "select o from Order o" +
                         " join fetch o.member m" +
-                        " join fetch o.delivery d", Order.class)
-                .getResultList();
+                        " join fetch o.delivery", Order.class
+        ).getResultList();
     }
 
     public List<Order> findAllWithItem() {
@@ -128,5 +130,6 @@ public class OrderRepository {
                 .setMaxResults(limit)
                 .getResultList();
     }
+
 }
 
